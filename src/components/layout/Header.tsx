@@ -13,7 +13,7 @@ const Header = ()=> {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 w-full bg-white shadow-md z-50"
+      className="fixed top-0 w-full bg-gradient-to-l from-green-100 to-white shadow-md z-50"
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
