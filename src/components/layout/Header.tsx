@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Logo from "@/assets/logo.png"
+import Logo from "@/assets/logo-bg.png"
 
 const Header = ()=> {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -13,7 +13,7 @@ const Header = ()=> {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 w-full bg-gradient-to-l from-green-100 to-white shadow-md z-50"
+      className="fixed top-0 w-full bg-gradient-to-l from-green-50 to-white shadow-md z-50"
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
@@ -22,15 +22,11 @@ const Header = ()=> {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center space-x-8">
-          <a href="#home" className="text-gray-700 hover:text-green-600 transition">Home</a>
-          <a href="#services" className="text-gray-700 hover:text-green-600 transition">Services</a>
-          <a href="#projects" className="text-gray-700 hover:text-green-600 transition">Projects</a>
-          <a href="#about" className="text-gray-700 hover:text-green-600 transition">About</a>
-          <a href="#contact" className="text-gray-700 hover:text-green-600 transition">Contact</a>
-          <a href="#demo" className="ml-4 px-5 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
-            Get a Demo
-          </a>
+        <nav className="hidden lg:flex items-center space-x-8 text-xl">
+          <a href="#" className="text-gray-700 hover:text-emerald-600 transition">Home</a>
+          <a href="#about" className="text-gray-700 hover:text-emerald-600 transition">About</a>
+          <a href="#services" className="text-gray-700 hover:text-emerald-600 transition">Services</a>
+            <a href="#contact" className="text-gray-700 hover:text-emerald-600 transition">Contact</a>
         </nav>
 
         {/* Mobile Hamburger */}

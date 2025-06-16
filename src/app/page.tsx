@@ -1,10 +1,16 @@
 import Image from "next/image";
 import Hero from "./Hero";
+import AboutUs from "./Aboutus";
+import ServicesSection from "./Services";
+import ContactNow from "./ContactNow ";
 
 export default function Home() {
   return (
-    <div>
+    <div className="mt-40">
       <Hero/>
+      <AboutUs/>
+      <ServicesSection/>
+      <ContactNow/>
     </div>
   );
 }

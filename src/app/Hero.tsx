@@ -10,20 +10,14 @@ const slides = [
     title: "أضواء العاصمة",
     subtitle: "مستقبل الطاقة الشمسية في السعودية",
     description: "حلول مبتكرة للطاقة النظيفة.",
-    cta: {
-      label: "اطلب استشارتك الآن",
-      href: "#contact",
-    },
+   
   },
   {
     image: slide2.src,
     title: "أضواء العاصمة",
     subtitle: "مستقبل الطاقة الشمسية في السعودية",
     description: "حلول مبتكرة للطاقة النظيفة.",
-    cta: {
-      label: "تواصل معنا",
-      href: "#contact",
-    },
+  
   },
 ];
 const Hero = () => {
@@ -36,7 +30,7 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="relative  min-h-[70vh] top-40 m-5 rounded-2xl overflow-hidden">
+    <div className="relative  min-h-[70vh] mx-20 rounded-2xl overflow-hidden">
       {/* Backgrounds */}
       {slides.map((slide, index) => (
         <div

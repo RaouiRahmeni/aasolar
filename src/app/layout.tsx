@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["400", "700"], // Add weights you need
@@ -26,6 +28,7 @@ export default function RootLayout({
         <Header />
 
         {children}
+        <WhatsAppButton/>
       </body>
     </html>
   );
