@@ -61,14 +61,14 @@ useEffect(() => {
           <p className="text-lg md:text-xl mb-6">
             {slides[currentIndex].description}
           </p>
-          {slides[currentIndex].cta && (
+          {/* {slides[currentIndex].cta && (
             <Link
               href={slides[currentIndex].cta.href}
               className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md text-lg font-semibold transition"
             >
               {slides[currentIndex].cta.label}
             </Link>
-          )}
+          )} */}
         </motion.div>
       </div>
     </div>
