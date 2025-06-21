@@ -4,6 +4,12 @@ import { motion, Variants } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FiSun, FiHome, FiBriefcase, FiTrendingUp } from "react-icons/fi";
 import { ReactElement } from "react";
+import Image from "next/image";
+import project1 from "@/assets/img5.jpg";
+import project2 from "@/assets/img6.jpg";
+import project3 from "@/assets/img7.jpg";
+import project4 from "@/assets/img9.jpg";
+import Link from "next/link";
 
 interface Service {
   icon: ReactElement;
@@ -12,125 +18,82 @@ interface Service {
   features: string[];
 }
 
+interface Project {
+  id: number;
+  image: any;
+  title: string;
+  link?: string;
+}
+
 const ServicesSection = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const services: Service[] = [
-    {
-      icon: <FiSun className="w-8 h-8" />,
-      title: "أنظمة الطاقة الشمسية للمنازل",
-      description: "حلول متكاملة لتوفير الطاقة للمنازل مع ضمان كفاءة عالية وتوفير في الفواتير",
-      features: ["تركيب الألواح", "أنظمة التخزين", "مراقبة الأداء"],
-    },
-    {
-      icon: <FiBriefcase className="w-8 h-8" />,
-      title: "حلول الطاقة للشركات",
-      description: "أنظمة مصممة خصيصًا للشركات والمصانع لتقليل التكاليف التشغيلية",
-      features: ["حلول متكاملة", "صيانة دورية", "تقارير الأداء"],
-    },
-    {
-      icon: <FiHome className="w-8 h-8" />,
-      title: "أنظمة الطاقة للمجمعات السكنية",
-      description: "تصميم وتنفيذ أنظمة الطاقة الشمسية للمجمعات السكنية الكبيرة",
-      features: ["تصميم مخصص", "تركيب متكامل", "صيانة شاملة"],
-    },
-    {
-      icon: <FiTrendingUp className="w-8 h-8" />,
-      title: "تحسين كفاءة الطاقة",
-      description: "تحليل وتحسين أنظمة الطاقة الحالية لزيادة الكفاءة وتقليل الهدر",
-      features: ["فحص الطاقة", "توصيات التحسين", "تنفيذ الحلول"],
-    },
+  const projects: Project[] = [
+    { id: 1, image: project1, title: "مشروع سكني بالرياض", link: "/projects/residential-riyadh" },
+    { id: 2, image: project2, title: "مصنع الطاقة الشمسية", link: "/projects/solar-factory" },
+    { id: 3, image: project3, title: "مجمع سكني بالدمام", link: "/projects/residential-dammam" },
+    { id: 4, image: project4, title: "نظام الطاقة التجاري", link: "/projects/commercial-system" },
   ];
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        when: "beforeChildren",
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
+  // ... (keep your existing services array and variants)
+ const parallaxVariants: Variants = {
+    offscreen: { y: 100, opacity: 0 },
+    onscreen: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
+        type: "spring",
+        bounce: 0.4,
+        duration: 1.2
+      }
+    }
   };
-
-  const hoverEffect = {
-    scale: 1.05,
-    boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
-    transition: {
-      duration: 0.3,
-      ease: "easeOut",
-    },
-  };
-
   return (
-    <section id="services" className="py-40 bg-gray-50"  ref={ref}>
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={containerVariants}
-          className="text-center mb-16"
-        >
-          <motion.h2
-            variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-          >
-            خدماتنا المتكاملة
-          </motion.h2>
-          <motion.p
-            variants={itemVariants}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
-          >
-            نقدم حلولاً مبتكرة في مجال الطاقة الشمسية تلبي جميع احتياجاتك من المنازل إلى المشاريع الكبيرة
-          </motion.p>
-        </motion.div>
+    <section id="services" className="bg-gray-50" ref={ref}>
+      {/* ... (keep your existing services section code) */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-            //   whileHover={hoverEffect}
-              className="bg-white rounded-xl p-6 shadow-md border border-gray-100 flex justify-center items-center flex-col h-full"
-            >
-              <div className="bg-green-100 w-14 h-14 rounded-full flex items-center justify-center mb-4 text-green-600">
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 text-end">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 mb-4 flex-grow text-end">{service.description}</p>
-              <ul className="space-y-2 ">
-                {service.features.map((feature, i) => (
-                  <li key={i} className="flex justify-end items-center text-gray-700">
-                    {feature}
-                    <span className="w-2 h-2 bg-green-500 rounded-full ms-2"></span>
-                  </li>
-                ))}
-              </ul>
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                className="mt-6 w-full py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+      {/* Modern Projects Gallery */}
+      <div className="py-20 bg-white overflow-hidden">
+        <div className="container mx-auto px-6">
+          {/* ... (keep your existing gallery header) */}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {projects.map((project) => (
+              <motion.div
+                key={project.id}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.5 }}
+                variants={parallaxVariants}
+                className="relative group overflow-hidden rounded-2xl shadow-xl h-80 md:h-96"
               >
-                المزيد من التفاصيل
-              </motion.button>
-            </motion.div>
-          ))}
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-all duration-700 group-hover:scale-105"
+                  quality={100}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-15 text-white translate-y-10 group-hover:translate-y-0 transition-all duration-500">
+                  <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                  <Link href={project.link || "#"} passHref>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="mt-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                      onClick={(e) => e.stopPropagation()} // Prevent event bubbling
+                    >
+                      عرض التفاصيل
+                    </motion.button>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
