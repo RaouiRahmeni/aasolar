@@ -32,10 +32,10 @@ const ServicesSection = () => {
   });
 
   const projects: Project[] = [
-    { id: 1, image: project1, title: "مشروع سكني بالرياض", link: "/projects/residential-riyadh" },
-    { id: 2, image: project2, title: "مصنع الطاقة الشمسية", link: "/projects/solar-factory" },
-    { id: 3, image: project3, title: "مجمع سكني بالدمام", link: "/projects/residential-dammam" },
-    { id: 4, image: project4, title: "نظام الطاقة التجاري", link: "/projects/commercial-system" },
+    { id: 1, image: project1, title: "مشروع سكني بالرياض", link: "#" },
+    { id: 2, image: project2, title: "مصنع الطاقة الشمسية", link: "#" },
+    { id: 3, image: project3, title: "مجمع سكني بالدمام", link: "#" },
+    { id: 4, image: project4, title: "نظام الطاقة التجاري", link: "#" },
   ];
 
   // ... (keep your existing services array and variants)
