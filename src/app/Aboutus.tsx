@@ -7,7 +7,6 @@ import { useRef } from "react";
 import { FiAward, FiUsers, FiCheckCircle } from "react-icons/fi";
 
 interface StatItem {
-  value: string;
   label: string;
   icon?: React.ReactNode;
 }
@@ -35,17 +34,14 @@ const AboutUs = () => {
     ],
     stats: [
       { 
-        value: "20+", 
         label: "سنوات من الخبرة",
         icon: <FiAward className="w-6 h-6 mx-auto" />
       },
       { 
-        value: "500+", 
         label: "مشروع ناجح",
         icon: <FiCheckCircle className="w-6 h-6 mx-auto" />
       },
       { 
-        value: "95%", 
         label: "رضا العملاء",
         icon: <FiUsers className="w-6 h-6 mx-auto" />
       }
@@ -149,7 +145,7 @@ const AboutUs = () => {
             </motion.p>
           ))}
 
-          <motion.div 
+        {/*  <motion.div 
             variants={itemVariants}
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 my-6 md:my-10"
           >
@@ -166,12 +162,11 @@ const AboutUs = () => {
                     {stat.icon}
                   </div>
                 )}
-                <div className="text-2xl md:text-3xl font-bold text-green-600 mb-1">{stat.value}</div>
                 <div className="text-sm md:text-md font-medium text-gray-600">{stat.label}</div>
               </motion.div>
-            ))}
+             ))}
           </motion.div>
-
+*/} 
           <motion.div variants={itemVariants}>
             <motion.a
               href={aboutData.cta.link}
