@@ -1,41 +1,41 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
-import Logo from "@/assets/logo-bg.png"
+import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import Logo from "@/assets/logo-bg.png";
 
 // Arabic navigation items
 const navItems = [
   { label: "الرئيسية", href: "#home" },
   { label: "من نحن", href: "#about" },
   { label: "خدماتنا", href: "#services" },
-  { label: "تواصل معنا", href: "#contact" }
-]
+  { label: "تواصل معنا", href: "#contact" },
+];
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <motion.header
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 w-full bg-gradient-to-l from-green-50 to-white shadow-md z-50"
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="fixed top-0 w-full border-b-4 border-green-500 bg-white shadow-md z-50"
       dir="ltr" // RTL direction for Arabic
     >
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo */}
         <motion.div
           whileHover={{ scale: 1.05 }}
-          transition={{ type: 'spring', stiffness: 300 }}
+          transition={{ type: "spring", stiffness: 300 }}
         >
-          <Image 
-            src={Logo} 
-            alt="أضواء العاصمة" 
-            width={120} 
-            height={30} 
-            priority 
+          <Image
+            src={Logo}
+            alt="أضواء العاصمة"
+            width={120}
+            height={30}
+            priority
             className="cursor-pointer"
           />
         </motion.div>
@@ -46,14 +46,16 @@ const Header = () => {
             <motion.a
               key={item.href}
               href={item.href}
-              className="text-gray-700 hover:text-emerald-600  m-0 transition-colors relative "
-              whileHover={{ scale: 1.05 }}
+              className="relative text-gray-700 hover:text-emerald-600 transition-colors"
+              whileHover={{ scale: 1.1 }}
             >
               {item.label}
               <motion.span
-                className="absolute bottom-0 right-0 w-0 h-0.5 bg-emerald-600"
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.3 }}
+                className="absolute bottom-0 right-0 h-0.5 bg-emerald-600 origin-right"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                style={{ width: "100%", transformOrigin: "right" }}
               />
             </motion.a>
           ))}
@@ -68,9 +70,19 @@ const Header = () => {
         >
           <svg width="24" height="24" fill="currentColor">
             {menuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <path
+                d="M6 18L18 6M6 6l12 12"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
             ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <path
+                d="M4 6h16M4 12h16M4 18h16"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
             )}
           </svg>
         </motion.button>
@@ -81,9 +93,9 @@ const Header = () => {
         {menuOpen && (
           <motion.nav
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
+            animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="lg:hidden bg-white shadow-inner overflow-hidden"
             dir="rtl"
           >
@@ -115,7 +127,7 @@ const Header = () => {
         )}
       </AnimatePresence>
     </motion.header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

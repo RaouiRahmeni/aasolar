@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { FiSun, FiHome, FiBriefcase, FiTrendingUp } from "react-icons/fi";
 import { ReactElement } from "react";
 import Image from "next/image";
-import project1 from "@/assets/img5.jpg";
+import project1 from "@/assets/3.jpeg";
 import project2 from "@/assets/img6.jpg";
 import project3 from "@/assets/img7.jpg";
 import project4 from "@/assets/img9.jpg";
@@ -39,7 +39,7 @@ const ServicesSection = () => {
   ];
 
   // ... (keep your existing services array and variants)
- const parallaxVariants: Variants = {
+  const parallaxVariants: Variants = {
     offscreen: { y: 100, opacity: 0 },
     onscreen: {
       y: 0,
@@ -47,9 +47,9 @@ const ServicesSection = () => {
       transition: {
         type: "spring",
         bounce: 0.4,
-        duration: 1.2
-      }
-    }
+        duration: 1.2,
+      },
+    },
   };
   return (
     <section id="services" className="bg-gray-50" ref={ref}>
@@ -60,7 +60,7 @@ const ServicesSection = () => {
         <div className="container mx-auto px-6">
           {/* ... (keep your existing gallery header) */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-8">
             {projects.map((project) => (
               <motion.div
                 key={project.id}
