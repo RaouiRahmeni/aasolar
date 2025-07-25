@@ -6,8 +6,8 @@ import { FiSun, FiHome, FiBriefcase, FiTrendingUp } from "react-icons/fi";
 import { ReactElement } from "react";
 import Image from "next/image";
 import project1 from "@/assets/3.jpeg";
-import project2 from "@/assets/img6.jpg";
-import project3 from "@/assets/img7.jpg";
+import project2 from "@/assets/img13.jpg";
+import project3 from "@/assets/img10.jpg";
 import project4 from "@/assets/img9.jpg";
 import Link from "next/link";
 
@@ -32,10 +32,15 @@ const ServicesSection = () => {
   });
 
   const projects: Project[] = [
-    { id: 1, image: project1, title: "مشروع سكني بالرياض", link: "#" },
-    { id: 2, image: project2, title: "مصنع الطاقة الشمسية", link: "#" },
-    { id: 3, image: project3, title: "مجمع سكني بالدمام", link: "#" },
-    { id: 4, image: project4, title: "نظام الطاقة التجاري", link: "#" },
+    { id: 1, image: project1, title: "طاقة تنمو مع الأرض", link: "#" },
+    { id: 2, image: project2, title: "نزرع النور لنحصد المستقبل", link: "#" },
+    { id: 3, image: project3, title: "طاقة مستدامة لمزارع الصحراء", link: "#" },
+    {
+      id: 4,
+      image: project4,
+      title: "طاقة من الأرض... نور من السماء",
+      link: "#",
+    },
   ];
 
   // ... (keep your existing services array and variants)
@@ -81,14 +86,14 @@ const ServicesSection = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-15 text-white translate-y-10 group-hover:translate-y-0 transition-all duration-500">
                   <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
                   <Link href={project.link || "#"} passHref>
-                    <motion.button
+                    {/* <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="mt-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
                       onClick={(e) => e.stopPropagation()} // Prevent event bubbling
                     >
                       عرض التفاصيل
-                    </motion.button>
+                    </motion.button> */}
                   </Link>
                 </div>
               </motion.div>

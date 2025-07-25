@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/assets/logo-bg.png";
+import Link from "next/link";
 
 // Arabic navigation items
 const navItems = [
@@ -11,6 +12,7 @@ const navItems = [
   { label: "من نحن", href: "#about" },
   { label: "خدماتنا", href: "#services" },
   { label: "تواصل معنا", href: "#contact" },
+  { label: "معرضنا", href: "/gallery" },
 ];
 
 const Header = () => {
@@ -43,21 +45,22 @@ const Header = () => {
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-10 space-x-8 space-x-reverse text-lg">
           {navItems.map((item) => (
-            <motion.a
+            <motion.div
               key={item.href}
-              href={item.href}
               className="relative text-gray-700 hover:text-emerald-600 transition-colors"
               whileHover={{ scale: 1.1 }}
             >
-              {item.label}
-              <motion.span
-                className="absolute bottom-0 right-0 h-0.5 bg-emerald-600 origin-right"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                style={{ width: "100%", transformOrigin: "right" }}
-              />
-            </motion.a>
+              <Link href={item.href}>
+                {item.label}
+                <motion.span
+                  className="absolute bottom-0 right-0 h-0.5 bg-emerald-600 origin-right"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  style={{ width: "100%", transformOrigin: "right" }}
+                />
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
