@@ -1,0 +1,117 @@
+{
+  "Header": {
+    "home": "Home",
+    "about": "About us",
+    "services": "Services",
+    "contactus": "Contact Us",
+    "gallery": "Gallery"
+  },
+
+  "Hero": {
+    "slide1": {
+      "title": "Capital Lights",
+      "subtitle": "The Future of Solar Energy in Saudi Arabia",
+      "description": "Innovative clean energy solutions to meet Vision 2030",
+      "cta": "Explore Our Services"
+    },
+    "slide2": {
+      "title": "Sustainable Energy",
+      "subtitle": "For a Green Future",
+      "description": "Integrated solar systems with world-class quality",
+      "cta": "Contact Us"
+    }
+  },
+  "About": {
+    "title": "About Us",
+    "desc1": "We are a leading Saudi company in solar energy solutions...",
+    "desc2": "With over 20 years of experience, we have completed 500+ projects.",
+    "desc3": "We believe the future lies in clean energy.",
+    "stat1": "Years of Experience",
+    "stat2": "Successful Projects",
+    "stat3": "Happy Clients",
+    "cta": "Contact Us",
+    "imageAlt": "About our company"
+  },
+  "Services": {
+    "title": "Our Projects",
+    "description": "Explore our latest solar energy projects.",
+    "viewDetails": "View Details",
+    "projects": {
+      "1": { "title": "Energy Growing with the Earth" },
+      "2": { "title": "We Plant Light to Harvest the Future" },
+      "3": { "title": "Sustainable Energy for Desert Farms" },
+      "4": { "title": "Energy from Earth... Light from the Sky" }
+    }
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help you with everything you need",
+    "contactOptions": {
+      "phone": {
+        "label": "Phone Number",
+        "value": "+966 12 345 6789"
+      },
+      "email": {
+        "label": "Email",
+        "value": "info@solarcompany.com"
+      },
+      "location": {
+        "label": "Location",
+        "value": "Riyadh, Saudi Arabia"
+      }
+    },
+    "form": {
+      "name": {
+        "label": "Full Name",
+        "required": "Name is required"
+      },
+      "email": {
+        "label": "Email",
+        "required": "Email is required",
+        "invalid": "Invalid email address"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "required": "Phone number is required",
+        "invalid": "Invalid phone number"
+      },
+      "message": {
+        "label": "Your Message",
+        "required": "Message is required"
+      },
+      "submit": "Send Message"
+    }
+  },
+  "Footer": {
+    "logoAlt": "Capital Lights Logo",
+    "description": "A leading company in solar energy solutions in Saudi Arabia, providing integrated solar systems for homes and businesses.",
+    "socialAria": "Social media link",
+    "quickLinksTitle": "Quick Links",
+    "quickLinks": {
+      "home": "Home",
+      "services": "Services",
+      "projects": "Projects",
+      "about": "About Us",
+      "contact": "Contact Us"
+    },
+    "servicesTitle": "Our Services",
+    "services": {
+      "residential": "Home Systems",
+      "commercial": "Business Solutions",
+      "complexes": "Residential Complexes",
+      "efficiency": "Efficiency Improvement",
+      "maintenance": "Regular Maintenance"
+    },
+    "contact": {
+      "phone": "+966 12 345 6789",
+      "email": "info@adwa-alasima.com",
+      "address": "Riyadh, Saudi Arabia"
+    },
+    "copyright": "© {year} Capital Lights. All rights reserved."
+  },
+  "WhatsAppButton": {
+    "button": "Chat with us",
+    "defaultMessage": "Hello, I’d like to ask about your services",
+    "ariaLabel": "Contact us on WhatsApp"
+  }
+}

@@ -42,10 +42,6 @@ export default function GalleryPage() {
     <div className="min-h-screen pb-16">
       <Header />
       <div className="mt-40 px-4 max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-green-700 text-center mb-10">
-          معرض الصور
-        </h1>
-
         {/* 🧱 Pinterest-style masonry layout */}
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {galleryImages.map((img, index) => (

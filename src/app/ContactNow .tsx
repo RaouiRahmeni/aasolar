@@ -4,6 +4,7 @@ import { motion, Variants } from "framer-motion";
 import { FiPhone, FiMail, FiMapPin, FiSend } from "react-icons/fi";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ReactElement } from "react";
+import { useTranslations } from "next-intl";
 
 // Type definitions
 interface ContactMethod {
@@ -21,6 +22,8 @@ type FormData = {
 };
 
 const ContactNow = () => {
+  const t = useTranslations("Contact");
+
   const {
     register,
     handleSubmit,
@@ -29,26 +32,26 @@ const ContactNow = () => {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
-    // Add your form submission logic here
+    // TODO: integrate with API
   };
 
   const contactMethods: ContactMethod[] = [
     {
       icon: <FiPhone className="w-6 h-6" />,
-      title: "اتصل بنا",
-      description: "+966 12 345 6789",
-      link: "tel:+966123456789",
+      title: t("contactOptions.phone.label"),
+      description: t("contactOptions.phone.value"),
+      link: `tel:${t("contactOptions.phone.value")}`,
     },
     {
       icon: <FiMail className="w-6 h-6" />,
-      title: "البريد الإلكتروني",
-      description: "info@solarcompany.com",
-      link: "mailto:info@solarcompany.com",
+      title: t("contactOptions.email.label"),
+      description: t("contactOptions.email.value"),
+      link: `mailto:${t("contactOptions.email.value")}`,
     },
     {
       icon: <FiMapPin className="w-6 h-6" />,
-      title: "الموقع",
-      description: "الرياض، المملكة العربية السعودية",
+      title: t("contactOptions.location.label"),
+      description: t("contactOptions.location.value"),
       link: "https://maps.google.com",
     },
   ];
@@ -102,15 +105,15 @@ const ContactNow = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            تواصل معنا الآن
+            {t("title")}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            لديك استفسار أو ترغب في الحصول على استشارة مجانية؟ تواصل مع فريقنا وسنكون سعداء بمساعدتك.
+            {t("subtitle")}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Methods Column */}
+          {/* Contact Methods */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -160,7 +163,7 @@ const ContactNow = () => {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form Column */}
+          {/* Contact Form */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -170,22 +173,23 @@ const ContactNow = () => {
             className="bg-white p-8 rounded-xl shadow-sm"
           >
             <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-right">
-              أرسل لنا رسالة
+              {t("form.submit")}{" "}
+              {/* Could also use a separate key for "Send us a message" */}
             </h3>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Name Field */}
+                {/* Name */}
                 <div>
                   <label
                     htmlFor="name"
                     className="block text-sm font-medium text-gray-700 mb-1 text-right"
                   >
-                    الاسم الكامل
+                    {t("form.name.label")}
                   </label>
                   <input
                     type="text"
                     id="name"
-                    {...register("name", { required: "الاسم مطلوب" })}
+                    {...register("name", { required: t("form.name.required") })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                   />
                   {errors.name && (
@@ -195,22 +199,22 @@ const ContactNow = () => {
                   )}
                 </div>
 
-                {/* Email Field */}
+                {/* Email */}
                 <div>
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700 mb-1 text-right"
                   >
-                    البريد الإلكتروني
+                    {t("form.email.label")}
                   </label>
                   <input
                     type="email"
                     id="email"
                     {...register("email", {
-                      required: "البريد الإلكتروني مطلوب",
+                      required: t("form.email.required"),
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "بريد إلكتروني غير صالح",
+                        message: t("form.email.invalid"),
                       },
                     })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
@@ -223,22 +227,22 @@ const ContactNow = () => {
                 </div>
               </div>
 
-              {/* Phone Field */}
+              {/* Phone */}
               <div>
                 <label
                   htmlFor="phone"
                   className="block text-sm font-medium text-gray-700 mb-1 text-right"
                 >
-                  رقم الهاتف
+                  {t("form.phone.label")}
                 </label>
                 <input
                   type="tel"
                   id="phone"
                   {...register("phone", {
-                    required: "رقم الهاتف مطلوب",
+                    required: t("form.phone.required"),
                     pattern: {
                       value: /^[0-9]+$/,
-                      message: "رقم هاتف غير صالح",
+                      message: t("form.phone.invalid"),
                     },
                   })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
@@ -250,18 +254,20 @@ const ContactNow = () => {
                 )}
               </div>
 
-              {/* Message Field */}
+              {/* Message */}
               <div>
                 <label
                   htmlFor="message"
                   className="block text-sm font-medium text-gray-700 mb-1 text-right"
                 >
-                  الرسالة
+                  {t("form.message.label")}
                 </label>
                 <textarea
                   id="message"
                   rows={4}
-                  {...register("message", { required: "الرسالة مطلوبة" })}
+                  {...register("message", {
+                    required: t("form.message.required"),
+                  })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                 ></textarea>
                 {errors.message && (
@@ -271,7 +277,7 @@ const ContactNow = () => {
                 )}
               </div>
 
-              {/* Submit Button */}
+              {/* Submit */}
               <motion.button
                 type="submit"
                 whileHover={buttonHover}
@@ -279,7 +285,7 @@ const ContactNow = () => {
                 className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
               >
                 <FiSend className="w-5 h-5" />
-                إرسال الرسالة
+                {t("form.submit")}
               </motion.button>
             </form>
           </motion.div>

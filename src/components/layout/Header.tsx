@@ -1,23 +1,38 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/assets/logo-bg.png";
 import Link from "next/link";
-
-// Arabic navigation items
-const navItems = [
-  { label: "الرئيسية", href: "#home" },
-  { label: "من نحن", href: "#about" },
-  { label: "خدماتنا", href: "#services" },
-  { label: "تواصل معنا", href: "#contact" },
-  { label: "معرضنا", href: "/gallery" },
-];
+import { useTranslations } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
+import { GoLinkExternal } from "react-icons/go";
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const t = useTranslations("Header");
+  const router = useRouter();
+  const pathname = usePathname();
+  const languages = [
+    { code: "en", name: "English", flag: "🇬🇧" },
+    { code: "ar", name: "العربية", flag: "🇸🇦" },
+  ];
 
+  const currentLanguage =
+    languages.find((lang) => pathname.startsWith(`/${lang.code}`)) ||
+    languages[0];
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navItems = [
+    { label: t("home"), href: "#home", icon: "" },
+    { label: t("about"), href: "#about", icon: "" },
+    { label: t("services"), href: "#services", icon: "" },
+    { label: t("contactus"), href: "#contact", icon: "" },
+    {
+      label: t("gallery"),
+      href: `/${currentLanguage.code}/gallery`,
+      icon: <GoLinkExternal className="text-xl" />,
+    },
+  ];
   return (
     <motion.header
       initial={{ y: -50, opacity: 0 }}
@@ -51,7 +66,10 @@ const Header = () => {
               whileHover={{ scale: 1.1 }}
             >
               <Link href={item.href}>
-                {item.label}
+                <div className="flex gap-2 items-center">
+                  {item.label}
+                  {item.icon}
+                </div>
                 <motion.span
                   className="absolute bottom-0 right-0 h-0.5 bg-emerald-600 origin-right"
                   initial={{ scaleX: 0 }}

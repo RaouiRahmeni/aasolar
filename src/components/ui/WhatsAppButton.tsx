@@ -2,13 +2,15 @@
 
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 const WhatsAppButton = () => {
+  const t = useTranslations("WhatsAppButton"); // 👈 namespace for translations
+
   const phoneNumber = "966123456789"; // Replace with your actual WhatsApp number
-  const message = "مرحباً، أريد الاستفسار عن خدماتكم"; // Optional default message
+  const message = t("defaultMessage"); // 👈 translated default message
 
   const handleClick = () => {
-    // Open WhatsApp with your number
     window.open(
       `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
       "_blank"
@@ -25,10 +27,12 @@ const WhatsAppButton = () => {
       <button
         onClick={handleClick}
         className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300"
-        aria-label="Contact us on WhatsApp"
+        aria-label={t("ariaLabel")}
       >
         <FaWhatsapp className="text-2xl" />
-        <span className="hidden sm:inline-block font-medium">تواصل معنا</span>
+        <span className="hidden sm:inline-block font-medium">
+          {t("button")}
+        </span>
       </button>
     </motion.div>
   );

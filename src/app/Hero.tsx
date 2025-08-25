@@ -6,6 +6,7 @@ import Image from "next/image";
 import slide1 from "@/assets/img1.jpg";
 import slide2 from "@/assets/img2.jpg";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 
 interface Slide {
   image: string;
@@ -18,30 +19,32 @@ interface Slide {
   };
 }
 
-const slides: Slide[] = [
-  {
-    image: slide1.src,
-    title: "أضواء العاصمة",
-    subtitle: "مستقبل الطاقة الشمسية في السعودية",
-    description: "حلول مبتكرة للطاقة النظيفة لتلبية احتياجات المملكة 2030",
-    cta: {
-      href: "#services",
-      label: "اكتشف خدماتنا"
-    }
-  },
-  {
-    image: slide2.src,
-    title: "طاقة مستدامة",
-    subtitle: "للمستقبل الأخضر",
-    description: "أنظمة شمسية متكاملة بجودة عالمية",
-    cta: {
-      href: "#contact",
-      label: "تواصل معنا"
-    }
-  },
-];
-
 const Hero = () => {
+  const t = useTranslations("Hero"); // 👈 namespace for Hero translations
+
+  const slides: Slide[] = [
+    {
+      image: slide1.src,
+      title: t("slide1.title"),
+      subtitle: t("slide1.subtitle"),
+      description: t("slide1.description"),
+      cta: {
+        href: "#services",
+        label: t("slide1.cta"),
+      },
+    },
+    {
+      image: slide2.src,
+      title: t("slide2.title"),
+      subtitle: t("slide2.subtitle"),
+      description: t("slide2.description"),
+      cta: {
+        href: "#contact",
+        label: t("slide2.cta"),
+      },
+    },
+  ];
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
 
@@ -60,26 +63,9 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const slideVariants = {
-    hidden: (direction: string) => ({
-      x: direction === "right" ? "100%" : "-100%",
-      opacity: 0
-    }),
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: [0.32, 0.72, 0, 1] }
-    },
-    exit: (direction: string) => ({
-      x: direction === "right" ? "-100%" : "100%",
-      opacity: 0,
-      transition: { duration: 0.8, ease: [0.32, 0.72, 0, 1] }
-    })
-  };
-
   const textVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.8 } }
+    visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.8 } },
   };
 
   return (
@@ -117,11 +103,11 @@ const Hero = () => {
         ))}
       </div>
 
+      {/* Slide Backgrounds */}
       <AnimatePresence custom={direction} initial={false}>
         <motion.div
           key={currentIndex}
           custom={direction}
-          // variants={slideVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
