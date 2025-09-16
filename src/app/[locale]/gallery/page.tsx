@@ -19,6 +19,7 @@ import img12 from "@/assets/img12.jpg";
 import img13 from "@/assets/img13.jpg";
 import img14 from "@/assets/img14.jpg";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 // 📸 Group them into an array
 const galleryImages = [
@@ -40,6 +41,7 @@ const galleryImages = [
 
 export default function GalleryPage() {
   const router = useRouter();
+  const t = useTranslations("gallery");
 
   const goBack = () => {
     router.back();
@@ -74,7 +76,7 @@ export default function GalleryPage() {
             className="flex items-center gap-2 hover:cursor-pointer hover:text-green-500"
             onClick={goBack}
           >
-            <p>Previous</p>
+            <p>{t("previous")}</p>
             <TiArrowBackOutline className="text-2xl" />
           </nav>
         </div>

@@ -113,5 +113,8 @@
     "button": "Chat with us",
     "defaultMessage": "Hello, I’d like to ask about your services",
     "ariaLabel": "Contact us on WhatsApp"
+  },
+  "gallery": {
+    "previous": "Previous"
   }
 }
