@@ -9,7 +9,7 @@
 
   "Hero": {
     "slide1": {
-      "title": "Capital Lights",
+      "title": "Aflak Solar",
       "subtitle": "The Future of Solar Energy in Saudi Arabia",
       "description": "Innovative clean energy solutions to meet Vision 2030",
       "cta": "Explore Our Services"
@@ -53,7 +53,7 @@
       },
       "email": {
         "label": "Email",
-        "value": "info@solarcompany.com"
+        "value": "info@aflak-solar.com"
       },
       "location": {
         "label": "Location",
@@ -83,7 +83,7 @@
     }
   },
   "Footer": {
-    "logoAlt": "Capital Lights Logo",
+    "logoAlt": "Aflak Solar Logo",
     "description": "A leading company in solar energy solutions in Saudi Arabia, providing integrated solar systems for homes and businesses.",
     "socialAria": "Social media link",
     "quickLinksTitle": "Quick Links",
@@ -104,10 +104,10 @@
     },
     "contact": {
       "phone": "+966 12 345 6789",
-      "email": "info@adwa-alasima.com",
+      "email": "info@aflak-solar.com",
       "address": "Riyadh, Saudi Arabia"
     },
-    "copyright": "© {year} Capital Lights. All rights reserved."
+    "copyright": "© {year} Aflak Solar. All rights reserved."
   },
   "WhatsAppButton": {
     "button": "Chat with us",
