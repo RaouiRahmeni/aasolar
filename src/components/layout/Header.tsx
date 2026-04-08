@@ -44,7 +44,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo */}
         <motion.div
-          className="flex flex-col gap-3 justify-center items-center cursor-pointer"
+          className="flex flex-col justify-center items-center cursor-pointer"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
@@ -54,7 +54,7 @@ const Header = () => {
             width={80}
             height={20}
             priority
-            className="cursor-pointer"
+            className="cursor-pointer mb-2"
           />
           <p className="text-2xl text-cyan-900">أضواء العاصمة لطاقة الشمسية</p>
           <p></p>
