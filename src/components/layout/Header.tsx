@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "@/assets/logo.png";
+import Logo from "@/assets/logo.jpg";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
@@ -51,13 +51,12 @@ const Header = () => {
           <Image
             src={Logo}
             alt="أضواء العاصمة"
-            width={80}
-            height={20}
+            width={200}
+            height={30}
             priority
             className="cursor-pointer mb-2"
           />
-          <p className="text-2xl text-cyan-900">أضواء العاصمة لطاقة الشمسية</p>
-          <p></p>
+          {/* <p className="text-2xl text-cyan-900">أضواء العاصمة لطاقة الشمسية</p> */}
         </motion.div>
 
         {/* Desktop Nav */}

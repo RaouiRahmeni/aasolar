@@ -5,7 +5,7 @@ import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 import { FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.jpg";
 
 const socialLinks = [
   { icon: FaTwitter, url: "#" },
@@ -62,7 +62,7 @@ const Footer = () => {
               <Image
                 src={logo}
                 alt={t("logoAlt")}
-                width={140}
+                width={200}
                 height={40}
                 className="mx-auto sm:mx-0"
               />

@@ -2,7 +2,7 @@
 import { TiArrowBackOutline } from "react-icons/ti";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "@/assets/logo.png";
+import Logo from "@/assets/logo.jpg";
 // ✅ Import your 14 images from assets/gallery/
 import img1 from "@/assets/img1.jpg";
 import img2 from "@/assets/5.jpeg";
