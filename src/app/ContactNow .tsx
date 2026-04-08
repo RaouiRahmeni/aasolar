@@ -32,7 +32,6 @@ const ContactNow = () => {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
-    // TODO: integrate with API
   };
 
   const contactMethods: ContactMethod[] = [
@@ -56,7 +55,6 @@ const ContactNow = () => {
     },
   ];
 
-  // Animation variants
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
@@ -93,8 +91,8 @@ const ContactNow = () => {
   };
 
   return (
-    <section id="contact" className="py-40 bg-gray-50">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-20 md:py-28 lg:py-40 bg-gray-50">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -102,17 +100,18 @@ const ContactNow = () => {
           variants={containerVariants}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             {t("title")}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             {t("subtitle")}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className=" grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
           {/* Contact Methods */}
           <motion.div
             initial="hidden"
@@ -120,7 +119,7 @@ const ContactNow = () => {
             variants={contactMethodVariants}
             transition={{ duration: 0.6, staggerChildren: 0.2 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-5 sm:space-y-6"
           >
             {contactMethods.map((method, index) => (
               <motion.a
@@ -128,16 +127,20 @@ const ContactNow = () => {
                 whileHover={hoverAnimation}
                 variants={contactMethodVariants}
                 href={method.link}
-                className="flex items-start gap-4 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all"
+                className="flex items-start justify-between mx-2   gap-4 p-5 sm:p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all"
               >
                 <div className="bg-sky-100 p-3 rounded-full text-sky-600">
                   {method.icon}
                 </div>
+
                 <div className="text-right">
-                  <h3 className="text-xl font-semibold text-gray-800">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
                     {method.title}
                   </h3>
-                  <p className="text-gray-600 mt-1">{method.description}</p>
+
+                  <p className="text-sm sm:text-base text-gray-600 mt-1">
+                    {method.description}
+                  </p>
                 </div>
               </motion.a>
             ))}
@@ -149,7 +152,7 @@ const ContactNow = () => {
               variants={mapVariants}
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
-              className="h-64 bg-gray-200 rounded-xl overflow-hidden"
+              className="h-52 sm:h-64 bg-gray-200 rounded-xl overflow-hidden"
             >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.186873560317!2d46.67227631500195!3d24.813477984065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2ee3b9b8e502a1%3A0x6d471a9e4e6a41e1!2sRiyadh!5e0!3m2!1sen!2ssa!4v1620000000000!5m2!1sen!2ssa"
@@ -159,7 +162,7 @@ const ContactNow = () => {
                 allowFullScreen
                 loading="lazy"
                 title="Company Location"
-              ></iframe>
+              />
             </motion.div>
           </motion.div>
 
@@ -170,14 +173,14 @@ const ContactNow = () => {
             variants={formVariants}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white p-8 rounded-xl shadow-sm"
+            className="bg-white p-6 sm:p-8 rounded-xl shadow-sm"
           >
-            <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-right">
-              {t("form.submit")}{" "}
-              {/* Could also use a separate key for "Send us a message" */}
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6 text-right">
+              {t("form.submit")}
             </h3>
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
                 {/* Name */}
                 <div>
                   <label
@@ -186,12 +189,14 @@ const ContactNow = () => {
                   >
                     {t("form.name.label")}
                   </label>
+
                   <input
                     type="text"
                     id="name"
                     {...register("name", { required: t("form.name.required") })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                    className="w-full px-4 py-3 sm:py-3.5 border border-gray-300 rounded-lg text-sm sm:text-base focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                   />
+
                   {errors.name && (
                     <p className="mt-1 text-sm text-red-600 text-right">
                       {errors.name.message}
@@ -207,6 +212,7 @@ const ContactNow = () => {
                   >
                     {t("form.email.label")}
                   </label>
+
                   <input
                     type="email"
                     id="email"
@@ -217,8 +223,9 @@ const ContactNow = () => {
                         message: t("form.email.invalid"),
                       },
                     })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                    className="w-full px-4 py-3 sm:py-3.5 border border-gray-300 rounded-lg text-sm sm:text-base focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                   />
+
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-600 text-right">
                       {errors.email.message}
@@ -235,6 +242,7 @@ const ContactNow = () => {
                 >
                   {t("form.phone.label")}
                 </label>
+
                 <input
                   type="tel"
                   id="phone"
@@ -245,8 +253,9 @@ const ContactNow = () => {
                       message: t("form.phone.invalid"),
                     },
                   })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                  className="w-full px-4 py-3 sm:py-3.5 border border-gray-300 rounded-lg text-sm sm:text-base focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                 />
+
                 {errors.phone && (
                   <p className="mt-1 text-sm text-red-600 text-right">
                     {errors.phone.message}
@@ -262,14 +271,16 @@ const ContactNow = () => {
                 >
                   {t("form.message.label")}
                 </label>
+
                 <textarea
                   id="message"
                   rows={4}
                   {...register("message", {
                     required: t("form.message.required"),
                   })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                ></textarea>
+                  className="w-full px-4 py-3 sm:py-3.5 border border-gray-300 rounded-lg text-sm sm:text-base focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                />
+
                 {errors.message && (
                   <p className="mt-1 text-sm text-red-600 text-right">
                     {errors.message.message}
@@ -282,7 +293,7 @@ const ContactNow = () => {
                 type="submit"
                 whileHover={buttonHover}
                 whileTap={buttonTap}
-                className="w-full bg-sky-600 hover:bg-sky-700 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+                className="w-full bg-sky-600 hover:bg-sky-700 text-white py-3 sm:py-3.5 px-6 rounded-lg font-medium flex items-center justify-center gap-2 text-sm sm:text-base transition-colors"
               >
                 <FiSend className="w-5 h-5" />
                 {t("form.submit")}
