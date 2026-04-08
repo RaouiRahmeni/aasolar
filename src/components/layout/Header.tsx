@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "@/assets/logo-bg.png";
+import Logo from "@/assets/logo.png";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
@@ -38,23 +38,26 @@ const Header = () => {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 w-full border-b-4 border-green-500 bg-white shadow-md z-50"
+      className="fixed top-0 w-full border-b-4 border-sky-400 bg-white shadow-md z-50"
       dir="ltr" // RTL direction for Arabic
     >
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo */}
         <motion.div
+          className="flex flex-col gap-3 justify-center items-center cursor-pointer"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <Image
             src={Logo}
             alt="أضواء العاصمة"
-            width={120}
-            height={30}
+            width={80}
+            height={20}
             priority
             className="cursor-pointer"
           />
+          <p className="text-2xl text-cyan-900">أضواء العاصمة لطاقة الشمسية</p>
+          <p></p>
         </motion.div>
 
         {/* Desktop Nav */}
@@ -125,7 +128,7 @@ const Header = () => {
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  className="py-3 px-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+                  className="py-3 px-2 text-gray-700 hover:text-sky-600 hover:bg-sky-50 rounded-md transition-colors"
                   onClick={() => setMenuOpen(false)}
                   initial={{ x: 20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -136,7 +139,7 @@ const Header = () => {
               ))}
               <motion.a
                 href="#demo"
-                className="mt-2 block text-center bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition-colors"
+                className="mt-2 block text-center bg-sky-600 text-white py-3 rounded-md hover:bg-sky-700 transition-colors"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.1 }}

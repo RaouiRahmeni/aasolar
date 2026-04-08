@@ -13,7 +13,7 @@ const WhatsAppButton = () => {
   const handleClick = () => {
     window.open(
       `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
-      "_blank"
+      "_blank",
     );
   };
 
@@ -26,7 +26,7 @@ const WhatsAppButton = () => {
     >
       <button
         onClick={handleClick}
-        className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300"
+        className="flex items-center justify-center gap-2 bg-[#25b0d3] hover:bg-[#057a6d] text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300"
         aria-label={t("ariaLabel")}
       >
         <FaWhatsapp className="text-2xl" />

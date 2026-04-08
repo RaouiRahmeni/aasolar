@@ -69,7 +69,7 @@ const ServicesSection = () => {
                 whileInView="onscreen"
                 viewport={{ once: true, amount: 0.5 }}
                 variants={parallaxVariants}
-                className="relative group overflow-hidden rounded-2xl shadow-xl h-80 md:h-96 border-b-6 border-green-500"
+                className="relative group overflow-hidden rounded-2xl shadow-xl h-80 md:h-96 border-b-6 border-sky-500"
               >
                 <Image
                   src={project.image}

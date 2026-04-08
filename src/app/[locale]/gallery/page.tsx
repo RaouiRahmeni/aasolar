@@ -52,7 +52,7 @@ export default function GalleryPage() {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 w-full border-b-4 border-green-500 bg-white shadow-md z-50"
+        className="fixed top-0 w-full border-b-4 border-sky-500 bg-white shadow-md z-50"
         dir="ltr" // RTL direction for Arabic
       >
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
@@ -73,7 +73,7 @@ export default function GalleryPage() {
 
           {/* Desktop Nav */}
           <nav
-            className="flex items-center gap-2 hover:cursor-pointer hover:text-green-500"
+            className="flex items-center gap-2 hover:cursor-pointer hover:text-sky-500"
             onClick={goBack}
           >
             <p>{t("previous")}</p>

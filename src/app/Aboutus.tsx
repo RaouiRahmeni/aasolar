@@ -80,7 +80,7 @@ const AboutUs = () => {
               {aboutData.title}
               <motion.span
                 variants={itemVariants}
-                className="absolute -bottom-2 md:-bottom-3 right-0 h-1 bg-green-500 origin-right"
+                className="absolute -bottom-2 md:-bottom-3 right-0 h-1 bg-sky-500 origin-right"
               />
             </h2>
           </motion.div>
@@ -98,7 +98,7 @@ const AboutUs = () => {
           <motion.div variants={itemVariants}>
             <motion.a
               href={aboutData.cta.link}
-              className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-2 md:px-8 md:py-3 rounded-lg text-base md:text-lg font-semibold transition-all hover:shadow-lg hover:shadow-green-500/20"
+              className="inline-block bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 md:px-8 md:py-3 rounded-lg text-base md:text-lg font-semibold transition-all hover:shadow-lg hover:shadow-sky-500/20"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

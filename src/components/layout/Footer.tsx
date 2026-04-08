@@ -76,7 +76,7 @@ const Footer = () => {
                 <motion.a
                   key={i}
                   href={url}
-                  className="p-3 rounded-full bg-gray-100 hover:bg-green-100 text-gray-600 hover:text-green-600 transition-colors"
+                  className="p-3 rounded-full bg-gray-100 hover:bg-sky-100 text-gray-600 hover:text-sky-600 transition-colors"
                   variants={fadeIn(i + 1)}
                   aria-label={t("socialAria")}
                 >
@@ -88,7 +88,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <motion.div variants={fadeIn(1)} className="text-end">
-            <h4 className="text-xl font-bold mb-4 border-b border-green-500 inline-block pb-1">
+            <h4 className="text-xl font-bold mb-4 border-b border-sky-500 inline-block pb-1">
               {t("quickLinksTitle")}
             </h4>
             <ul className="space-y-3 mt-4">
@@ -96,7 +96,7 @@ const Footer = () => {
                 <motion.li key={key} variants={fadeIn(i + 2)}>
                   <a
                     href={href}
-                    className="text-gray-600 hover:text-green-600 transition-colors"
+                    className="text-gray-600 hover:text-sky-600 transition-colors"
                   >
                     {t(`quickLinks.${key}`)}
                   </a>
@@ -107,7 +107,7 @@ const Footer = () => {
 
           {/* Services */}
           <motion.div variants={fadeIn(2)} className="text-end">
-            <h4 className="text-xl font-bold mb-4 border-b border-green-500 inline-block pb-1">
+            <h4 className="text-xl font-bold mb-4 border-b border-sky-500 inline-block pb-1">
               {t("servicesTitle")}
             </h4>
             <ul className="space-y-3 mt-4">
@@ -115,7 +115,7 @@ const Footer = () => {
                 <motion.li key={key} variants={fadeIn(i + 3)}>
                   <a
                     href={href}
-                    className="text-gray-600 hover:text-green-600 transition-colors"
+                    className="text-gray-600 hover:text-sky-600 transition-colors"
                   >
                     {t(`services.${key}`)}
                   </a>

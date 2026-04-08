@@ -96,7 +96,7 @@ const Hero = () => {
               setCurrentIndex(index);
             }}
             className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
-              index === currentIndex ? "bg-green-500 w-4 sm:w-6" : "bg-white/50"
+              index === currentIndex ? "bg-sky-500 w-4 sm:w-6" : "bg-white/50"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
@@ -136,9 +136,7 @@ const Hero = () => {
             className="text-white max-w-4xl px-2 sm:px-4"
           >
             <motion.h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight mb-2 sm:mb-4">
-              <span className="text-green-400">
-                {slides[currentIndex].title}
-              </span>
+              <span className="text-sky-400">{slides[currentIndex].title}</span>
               <br />
               {slides[currentIndex].subtitle}
             </motion.h1>
@@ -148,7 +146,7 @@ const Hero = () => {
             {slides[currentIndex].cta && (
               <motion.a
                 href={slides[currentIndex].cta?.href}
-                className="inline-block bg-green-600 hover:bg-green-700 text-white px-4 py-2 sm:px-6 sm:py-2 md:px-8 md:py-3 rounded-lg text-sm sm:text-base md:text-lg font-semibold transition-all hover:shadow-lg hover:shadow-green-500/20"
+                className="inline-block bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 sm:px-6 sm:py-2 md:px-8 md:py-3 rounded-lg text-sm sm:text-base md:text-lg font-semibold transition-all hover:shadow-lg hover:shadow-sky-500/20"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

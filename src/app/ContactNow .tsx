@@ -130,7 +130,7 @@ const ContactNow = () => {
                 href={method.link}
                 className="flex items-start gap-4 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all"
               >
-                <div className="bg-green-100 p-3 rounded-full text-green-600">
+                <div className="bg-sky-100 p-3 rounded-full text-sky-600">
                   {method.icon}
                 </div>
                 <div className="text-right">
@@ -190,7 +190,7 @@ const ContactNow = () => {
                     type="text"
                     id="name"
                     {...register("name", { required: t("form.name.required") })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                   />
                   {errors.name && (
                     <p className="mt-1 text-sm text-red-600 text-right">
@@ -217,7 +217,7 @@ const ContactNow = () => {
                         message: t("form.email.invalid"),
                       },
                     })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                   />
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-600 text-right">
@@ -245,7 +245,7 @@ const ContactNow = () => {
                       message: t("form.phone.invalid"),
                     },
                   })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                 />
                 {errors.phone && (
                   <p className="mt-1 text-sm text-red-600 text-right">
@@ -268,7 +268,7 @@ const ContactNow = () => {
                   {...register("message", {
                     required: t("form.message.required"),
                   })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                 ></textarea>
                 {errors.message && (
                   <p className="mt-1 text-sm text-red-600 text-right">
@@ -282,7 +282,7 @@ const ContactNow = () => {
                 type="submit"
                 whileHover={buttonHover}
                 whileTap={buttonTap}
-                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+                className="w-full bg-sky-600 hover:bg-sky-700 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
               >
                 <FiSend className="w-5 h-5" />
                 {t("form.submit")}
