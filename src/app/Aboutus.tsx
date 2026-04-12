@@ -145,21 +145,37 @@ export default function AboutUs() {
 
           {/* STATS */}
           <motion.div
-            variants={container}
-            className="grid grid-cols-3 gap-6 mt-14"
+            variants={container} // Ensure your parent container has staggerChildren
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
           >
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
                 variants={item}
-                className="bg-gray-50 hover:bg-sky-50 transition p-6 rounded-xl text-center border border-gray-100"
+                className="group relative p-4 mt-4 rounded-2xl bg-white border border-slate-100 
+                 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] 
+                 hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1)] 
+                 hover:-translate-y-2 transition-all duration-300 ease-out 
+                 flex flex-col items-center justify-center overflow-hidden"
               >
-                <div className="text-sky-600 flex justify-center mb-3">
+                {/* Subtle Background Decoration */}
+                <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-sky-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl" />
+
+                <div className="relative z-10 text-sky-500 bg-sky-50 p-4 rounded-xl mb-4 group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
                   {stat.icon}
                 </div>
 
-                <p className="text-2xl font-bold">{stat.value}</p>
-                <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
+                <div className="relative z-10 text-center">
+                  <h3 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                    {stat.value}
+                  </h3>
+                  <p className="text-sm font-medium text-slate-500 uppercase tracking-widest mt-2">
+                    {stat.label}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
