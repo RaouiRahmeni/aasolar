@@ -1,134 +1,170 @@
 "use client";
 
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
-import aboutImage from "@/assets/img3.jpg";
 import { useRef } from "react";
 import { FiAward, FiUsers, FiCheckCircle } from "react-icons/fi";
 import { useTranslations } from "next-intl";
+import aboutImage from "@/assets/img3.jpg";
 
 interface StatItem {
   label: string;
-  icon?: React.ReactNode;
+  value: string;
+  icon: React.ReactNode;
 }
 
-const AboutUs = () => {
-  const t = useTranslations("About"); // 👈 namespace
+export default function AboutUs() {
+  const t = useTranslations("About");
+
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-120px" });
 
-  const aboutData = {
-    title: t("title"),
-    description: [t("desc1"), t("desc2"), t("desc3")],
-    stats: [
-      { label: t("stat1"), icon: <FiAward className="w-6 h-6 mx-auto" /> },
-      {
-        label: t("stat2"),
-        icon: <FiCheckCircle className="w-6 h-6 mx-auto" />,
-      },
-      { label: t("stat3"), icon: <FiUsers className="w-6 h-6 mx-auto" /> },
-    ],
-    cta: {
-      text: t("cta"),
-      link: "#contact",
+  const stats: StatItem[] = [
+    {
+      label: t("stat1"),
+      value: "10+",
+      icon: <FiAward size={28} />,
     },
-  };
+    {
+      label: t("stat2"),
+      value: "150+",
+      icon: <FiCheckCircle size={28} />,
+    },
+    {
+      label: t("stat3"),
+      value: "50+",
+      icon: <FiUsers size={28} />,
+    },
+  ];
 
-  const containerVariants: Variants = {
+  const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+      transition: { staggerChildren: 0.18 },
     },
   };
 
-  const itemVariants: Variants = {
-    hidden: { y: 30, opacity: 0 },
+  const item = {
+    hidden: { opacity: 0, y: 40 },
     visible: {
+      opacity: 1,
       y: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: [0.2, 0.8, 0.4, 1] },
-    },
-  };
-
-  const imageVariants: Variants = {
-    hidden: { scale: 0.95, opacity: 0, rotate: -2 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-      transition: { duration: 1, ease: [0.2, 0.8, 0.4, 1] },
+      transition: { duration: 0.7 },
     },
   };
 
   return (
     <section
       id="about"
-      className="py-16 md:py-28 bg-white text-gray-800 overflow-hidden"
       ref={ref}
+      className="relative py-24 md:py-32 bg-white overflow-hidden"
     >
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center text-end">
-        {/* Text */}
+      {/* background accent */}
+      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-sky-100 rounded-full blur-3xl opacity-40" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 grid lg:grid-cols-2 gap-16 items-center ">
+        {/* IMAGE */}
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          variants={containerVariants}
-          className="order-2 md:order-1"
+          variants={item}
+          className="relative"
         >
-          <motion.div variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8 leading-tight relative inline-block">
-              {aboutData.title}
-              <motion.span
-                variants={itemVariants}
-                className="absolute -bottom-2 md:-bottom-3 right-0 h-1 bg-sky-500 origin-right"
-              />
-            </h2>
-          </motion.div>
-
-          {aboutData.description.map((paragraph, i) => (
-            <motion.p
-              key={i}
-              variants={itemVariants}
-              className="text-base sm:text-lg md:text-xl leading-relaxed mb-4 md:mb-6 text-gray-700"
-            >
-              {paragraph}
-            </motion.p>
-          ))}
-
-          <motion.div variants={itemVariants}>
-            <motion.a
-              href={aboutData.cta.link}
-              className="inline-block bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 md:px-8 md:py-3 rounded-lg text-base md:text-lg font-semibold transition-all hover:shadow-lg hover:shadow-sky-500/20"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {aboutData.cta.text}
-            </motion.a>
-          </motion.div>
-        </motion.div>
-
-        {/* Image */}
-        <motion.div
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={imageVariants}
-          className="order-1 md:order-2 relative"
-        >
-          <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl">
+          <div className="relative h-[420px] md:h-[520px] rounded-3xl overflow-hidden shadow-2xl">
             <Image
               src={aboutImage as StaticImageData}
               alt={t("imageAlt")}
               fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
               priority
+              className="object-cover  border-b-8 border-sky-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/30" />
+
+            <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent" />
           </div>
+
+          {/* floating stat card */}
+          <div className="absolute -bottom-10 -right-6 bg-white shadow-xl rounded-2xl px-6 py-4 flex items-center gap-4">
+            <FiAward className="text-sky-600" size={28} />
+            <div>
+              <p className="text-lg font-bold">10+</p>
+              <p className="text-sm text-gray-500">{t("experience")}</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* TEXT CONTENT */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={container}
+        >
+          <motion.h2
+            variants={item}
+            className="text-4xl md:text-5xl font-bold leading-tight"
+          >
+            {t("title")}
+          </motion.h2>
+
+          <motion.div
+            variants={item}
+            className="w-20 h-1 bg-sky-500 mt-6 mb-8 rounded"
+          />
+
+          <motion.p
+            variants={item}
+            className="text-lg text-gray-600 leading-relaxed mb-6"
+          >
+            {t("desc1")}
+          </motion.p>
+
+          <motion.p
+            variants={item}
+            className="text-lg text-gray-600 leading-relaxed mb-6"
+          >
+            {t("desc2")}
+          </motion.p>
+
+          <motion.p
+            variants={item}
+            className="text-lg text-gray-600 leading-relaxed mb-10"
+          >
+            {t("desc3")}
+          </motion.p>
+
+          {/* CTA */}
+          <motion.a
+            variants={item}
+            href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg shadow-sky-500/20 transition"
+          >
+            {t("cta")}
+          </motion.a>
+
+          {/* STATS */}
+          <motion.div
+            variants={container}
+            className="grid grid-cols-3 gap-6 mt-14"
+          >
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                variants={item}
+                className="bg-gray-50 hover:bg-sky-50 transition p-6 rounded-xl text-center border border-gray-100"
+              >
+                <div className="text-sky-600 flex justify-center mb-3">
+                  {stat.icon}
+                </div>
+
+                <p className="text-2xl font-bold">{stat.value}</p>
+                <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>
   );
-};
-
-export default AboutUs;
+}

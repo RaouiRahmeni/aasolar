@@ -3,24 +3,23 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useTranslations } from "next-intl";
+
 import slide1 from "@/assets/img1.jpg";
 import slide2 from "@/assets/img2.jpg";
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { useTranslations } from "next-intl";
 
 interface Slide {
   image: string;
   title: string;
   subtitle: string;
   description: string;
-  cta?: {
-    href: string;
-    label: string;
-  };
+  href?: string;
+  label?: string;
 }
 
-const Hero = () => {
-  const t = useTranslations("Hero"); // 👈 namespace for Hero translations
+export default function Hero() {
+  const t = useTranslations("Hero");
 
   const slides: Slide[] = [
     {
@@ -28,136 +27,137 @@ const Hero = () => {
       title: t("slide1.title"),
       subtitle: t("slide1.subtitle"),
       description: t("slide1.description"),
-      cta: {
-        href: "#services",
-        label: t("slide1.cta"),
-      },
+      href: "#services",
+      label: t("slide1.cta"),
     },
     {
       image: slide2.src,
       title: t("slide2.title"),
       subtitle: t("slide2.subtitle"),
       description: t("slide2.description"),
-      cta: {
-        href: "#contact",
-        label: t("slide2.cta"),
-      },
+      href: "#contact",
+      label: t("slide2.cta"),
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState<"left" | "right">("right");
+  const [[index, direction], setIndex] = useState<[number, number]>([0, 0]);
 
-  const nextSlide = () => {
-    setDirection("right");
-    setCurrentIndex((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setDirection("left");
-    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  const paginate = (dir: number) => {
+    setIndex(([prev]) => [(prev + dir + slides.length) % slides.length, dir]);
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 7000);
-    return () => clearInterval(interval);
+    const timer = setInterval(() => paginate(1), 7000);
+    return () => clearInterval(timer);
   }, []);
 
-  const textVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.8 } },
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 1200 : -1200,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      x: dir > 0 ? -1200 : 1200,
+      opacity: 0,
+    }),
   };
 
   return (
-    <div className="relative w-10-12 h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] rounded-none lg:rounded-2xl overflow-hidden mx-0 lg:mx-20">
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-2 sm:left-4 top-1/2 z-40 p-1 sm:p-2 rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-black/50 transition-all"
-        aria-label="Previous slide"
-      >
-        <FiChevronLeft className="text-lg sm:text-xl md:text-2xl" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-2 sm:right-4 top-1/2 z-40 p-1 sm:p-2 rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-black/50 transition-all"
-        aria-label="Next slide"
-      >
-        <FiChevronRight className="text-lg sm:text-xl md:text-2xl" />
-      </button>
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-40 flex gap-1 sm:gap-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              setDirection(index > currentIndex ? "right" : "left");
-              setCurrentIndex(index);
-            }}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
-              index === currentIndex ? "bg-sky-500 w-4 sm:w-6" : "bg-white/50"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Slide Backgrounds */}
-      <AnimatePresence custom={direction} initial={false}>
+    <section className="relative h-[85vh] w-full overflow-hidden lg:px-16">
+      {/* Slides */}
+      <AnimatePresence initial={false} custom={direction}>
         <motion.div
-          key={currentIndex}
+          key={index}
           custom={direction}
-          initial="hidden"
-          animate="visible"
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
           exit="exit"
-          className="absolute inset-0 w-full h-full"
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="absolute inset-0"
         >
           <Image
-            src={slides[currentIndex].image}
-            alt={`Slide ${currentIndex + 1}`}
+            src={slides[index].image}
+            alt="hero image"
             fill
-            className="object-cover"
             priority
+            className="object-cover"
             quality={100}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         </motion.div>
       </AnimatePresence>
 
       {/* Content */}
-      <div className="relative z-30 h-full flex items-center justify-center text-center px-4 sm:px-6">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            variants={textVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-white max-w-4xl px-2 sm:px-4"
+      <div className="relative z-20 flex h-full items-center">
+        <div className="max-w-3xl text-white px-6 md:px-12">
+          <motion.h1
+            key={slides[index].title}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-4xl md:text-6xl font-extrabold leading-tight"
           >
-            <motion.h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight mb-2 sm:mb-4">
-              <span className="text-sky-400">{slides[currentIndex].title}</span>
-              <br />
-              {slides[currentIndex].subtitle}
-            </motion.h1>
-            <motion.p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-4 sm:mb-6 md:mb-8">
-              {slides[currentIndex].description}
-            </motion.p>
-            {slides[currentIndex].cta && (
-              <motion.a
-                href={slides[currentIndex].cta?.href}
-                className="inline-block bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 sm:px-6 sm:py-2 md:px-8 md:py-3 rounded-lg text-sm sm:text-base md:text-lg font-semibold transition-all hover:shadow-lg hover:shadow-sky-500/20"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {slides[currentIndex].cta?.label}
-              </motion.a>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-};
+            <span className="text-sky-400">{slides[index].title}</span>
+            <br />
+            {slides[index].subtitle}
+          </motion.h1>
 
-export default Hero;
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mt-6 text-lg md:text-xl text-gray-200"
+          >
+            {slides[index].description}
+          </motion.p>
+
+          {slides[index].href && (
+            <motion.a
+              href={slides[index].href}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block mt-8 bg-sky-600 hover:bg-sky-700 px-8 py-3 rounded-xl font-semibold transition shadow-lg shadow-sky-600/20"
+            >
+              {slides[index].label}
+            </motion.a>
+          )}
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="absolute bottom-10 left-0 right-0 z-30 flex items-center justify-center gap-6">
+        <button
+          onClick={() => paginate(-1)}
+          className="p-3 rounded-full bg-white/10 backdrop-blur hover:bg-white/20 transition"
+        >
+          <FiChevronLeft className="text-white text-2xl" />
+        </button>
+
+        <div className="flex gap-2">
+          {slides.map((_, i) => (
+            <div
+              key={i}
+              className={`h-2 rounded-full transition-all ${
+                i === index ? "w-8 bg-sky-500" : "w-3 bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={() => paginate(1)}
+          className="p-3 rounded-full bg-white/10 backdrop-blur hover:bg-white/20 transition"
+        >
+          <FiChevronRight className="text-white text-2xl" />
+        </button>
+      </div>
+    </section>
+  );
+}

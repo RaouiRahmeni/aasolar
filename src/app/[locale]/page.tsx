@@ -8,7 +8,7 @@ import Header from "@/components/layout/Header";
 
 export default function Home() {
   return (
-    <div className="mt-40 overflow-hidden">
+    <div className="overflow-hidden">
       <Header />
       <div>
         <Hero />

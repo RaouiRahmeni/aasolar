@@ -2,16 +2,19 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "@/assets/logo.jpg";
+import Logo from "@/assets/logo.png";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import { GoLinkExternal } from "react-icons/go";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
 
 const Header = () => {
   const t = useTranslations("Header");
   const router = useRouter();
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const languages = [
     { code: "en", name: "English", flag: "🇬🇧" },
     { code: "ar", name: "العربية", flag: "🇸🇦" },
@@ -21,132 +24,177 @@ const Header = () => {
     languages.find((lang) => pathname.startsWith(`/${lang.code}`)) ||
     languages[0];
 
-  const [menuOpen, setMenuOpen] = useState(false);
   const navItems = [
-    { label: t("home"), href: "#home", icon: "" },
-    { label: t("about"), href: "#about", icon: "" },
-    { label: t("services"), href: "#services", icon: "" },
-    { label: t("contactus"), href: "#contact", icon: "" },
+    { label: t("home"), href: "#home" },
+    { label: t("about"), href: "#about" },
+    { label: t("services"), href: "#services" },
+    { label: t("contactus"), href: "#contact" },
     {
       label: t("gallery"),
       href: `/${currentLanguage.code}/gallery`,
-      icon: <GoLinkExternal className="text-xl" />,
+      icon: <GoLinkExternal className="w-4 h-4" />,
+      external: true,
     },
   ];
+
   return (
     <motion.header
-      initial={{ y: -50, opacity: 0 }}
+      initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 w-full border-b-4 border-sky-400 bg-white shadow-md z-50"
-      dir="ltr" // RTL direction for Arabic
+      transition={{ duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }}
+      className="fixed top-0 w-full bg-white/50 backdrop-blur-md shadow-sm z-50"
+      dir="ltr"
     >
-      <div className="container mx-auto px-4 py-2 flex items-center justify-between">
-        {/* Logo */}
-        <motion.div
-          className="flex flex-col justify-center items-center cursor-pointer"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <Image
-            src={Logo}
-            alt="أضواء العاصمة"
-            width={200}
-            height={30}
-            priority
-            className="cursor-pointer mb-2"
-          />
-          {/* <p className="text-2xl text-cyan-900">أضواء العاصمة لطاقة الشمسية</p> */}
-        </motion.div>
-
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-10 space-x-8 space-x-reverse text-lg">
-          {navItems.map((item) => (
-            <motion.div
-              key={item.href}
-              className="relative text-gray-700 hover:text-emerald-600 transition-colors"
-              whileHover={{ scale: 1.1 }}
-            >
-              <Link href={item.href}>
-                <div className="flex gap-2 items-center">
-                  {item.label}
-                  {item.icon}
-                </div>
-                <motion.span
-                  className="absolute bottom-0 right-0 h-0.5 bg-emerald-600 origin-right"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  style={{ width: "100%", transformOrigin: "right" }}
-                />
-              </Link>
-            </motion.div>
-          ))}
-        </nav>
-
-        {/* Mobile Hamburger */}
-        <motion.button
-          className="lg:hidden p-2 text-gray-600 focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="قائمة التنقل"
-          whileTap={{ scale: 0.9 }}
-        >
-          <svg width="24" height="24" fill="currentColor">
-            {menuOpen ? (
-              <path
-                d="M6 18L18 6M6 6l12 12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            ) : (
-              <path
-                d="M4 6h16M4 12h16M4 18h16"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            )}
-          </svg>
-        </motion.button>
-      </div>
-
-      {/* Mobile Menu with AnimatePresence */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.nav
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden bg-white shadow-inner overflow-hidden"
-            dir="rtl"
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          {/* Logo */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="relative z-10"
           >
-            <div className="flex flex-col px-4 py-2 space-y-3">
-              {navItems.map((item) => (
-                <motion.a
-                  key={item.href}
+            <Link href="/" className="block">
+              <Image
+                src={Logo}
+                alt="أضواء العاصمة"
+                width={160}
+                height={40}
+                priority
+                className="w-32 sm:w-40 h-auto cursor-pointer"
+              />
+            </Link>
+          </motion.div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {navItems.map((item, index) => (
+              <motion.div
+                key={item.href}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link
                   href={item.href}
-                  className="py-3 px-2 text-gray-700 hover:text-sky-600 hover:bg-sky-50 rounded-md transition-colors"
-                  onClick={() => setMenuOpen(false)}
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
+                  className="group relative px-4 py-2 text-gray-700 hover:text-sky-600 transition-colors duration-300 flex items-center gap-2"
+                >
+                  <span className="font-medium">{item.label}</span>
+                  {item.icon && (
+                    <span className="opacity-70 group-hover:opacity-100 transition-opacity">
+                      {item.icon}
+                    </span>
+                  )}
+
+                  {/* Animated underline */}
+                  <motion.span
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-sky-500 to-emerald-500 origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                  />
+                </Link>
+              </motion.div>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="lg:hidden relative z-10 p-2 text-gray-700 hover:text-sky-600 transition-colors"
+            aria-label="Toggle menu"
+          >
+            <AnimatePresence mode="wait">
+              {menuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {item.label}
-                </motion.a>
-              ))}
-              <motion.a
-                href="#demo"
-                className="mt-2 block text-center bg-sky-600 text-white py-3 rounded-md hover:bg-sky-700 transition-colors"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.1 }}
-              >
-                احصل على عرض
-              </motion.a>
-            </div>
-          </motion.nav>
+                  <HiX className="w-6 h-6" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <HiMenuAlt3 className="w-6 h-6" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden"
+              style={{ top: "4rem" }}
+            />
+
+            {/* Menu Panel */}
+            <motion.nav
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-100 shadow-lg"
+            >
+              <div className="container mx-auto px-4 py-6 space-y-2">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center justify-between px-4 py-3 text-gray-700 hover:text-sky-600 hover:bg-sky-50/50 rounded-lg transition-all duration-200 group"
+                    >
+                      <span className="font-medium">{item.label}</span>
+                      {item.icon && (
+                        <span className="opacity-60 group-hover:opacity-100 transition-opacity">
+                          {item.icon}
+                        </span>
+                      )}
+                    </Link>
+                  </motion.div>
+                ))}
+
+                {/* CTA Button in Mobile Menu */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navItems.length * 0.05 }}
+                  className="pt-4"
+                >
+                  <Link
+                    href="#demo"
+                    onClick={() => setMenuOpen(false)}
+                    className="block text-center bg-gradient-to-r from-sky-500 to-emerald-500 text-white py-3 px-6 rounded-lg font-medium hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                  >
+                    احصل على عرض
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.nav>
+          </>
         )}
       </AnimatePresence>
     </motion.header>
